@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cena de Enamorados | H Restaurant</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary-color: #C77D56; /* Naranja elegante del logo */
@@ -16,7 +21,7 @@
         }
 
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Fallback para el cuerpo */
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
@@ -42,22 +47,24 @@
             width: 150px;
             height: auto;
             margin-bottom: 20px;
-            /* Elimina visualmente el fondo oscuro de la imagen */
+            /* Mezcla para integrar el logo si tiene fondo blanco, o simplemente mostrarlo */
             mix-blend-mode: multiply; 
-            /* Asegura que se vea bien sobre el fondo oscuro de la tarjeta */
             filter: brightness(1.2) contrast(1.1);
         }
 
         h1 {
+            font-family: 'Lora', serif; /* APLICADO LORA */
             color: var(--primary-color);
             margin-bottom: 10px;
-            font-weight: 300;
-            font-size: 28px;
+            font-weight: 500;
+            font-size: 32px; /* Un poco más grande para lucir la fuente */
             letter-spacing: 1px;
         }
 
         p.subtitle {
-            font-size: 14px;
+            font-family: 'Playfair Display', serif; /* APLICADO PLAYFAIR */
+            font-style: italic; /* APLICADO ITALICS */
+            font-size: 16px;
             color: #B0B0B0;
             margin-bottom: 30px;
             line-height: 1.5;
@@ -88,6 +95,7 @@
             transition: border-color 0.3s, background-color 0.3s;
             background-color: var(--input-bg);
             color: var(--text-color);
+            font-family: 'Helvetica Neue', sans-serif; /* Mantener sans-serif para lectura fácil en inputs */
         }
 
         input::placeholder, textarea::placeholder {
@@ -114,10 +122,11 @@
             margin-top: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-family: 'Lora', serif; /* Botón también en Lora para consistencia */
         }
 
         button:hover {
-            background-color: #A66543; /* Un tono más oscuro del naranja */
+            background-color: #A66543;
         }
 
         button:active {
@@ -150,14 +159,15 @@
         .success-message h3 {
             color: var(--primary-color);
             margin-top: 0;
+            font-family: 'Lora', serif;
         }
-
     </style>
 </head>
 <body>
 
 <div class="container">
-    <img src="logo2.png" alt="H Restaurant Logo" class="logo">
+    <img src="logo_trans_new.png" alt="H Restaurant Logo" class="logo">
+    
     <h1>H Restaurant</h1>
     <p class="subtitle">Celebra el amor con una experiencia gastronómica inolvidable. <br><strong>Regístrate para la preventa exclusiva.</strong></p>
 
@@ -222,7 +232,6 @@
 </div>
 
 <script>
-    // AQUÍ ESTÁ TU URL YA INTEGRADA
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzeD1sHLlZkp0CtJRAC3pjBvP1I5uEzjBU3QFyJav4SYXxIjx3KcCMpiLZUhZFm-L-6/exec';
     
     const form = document.forms['submit-to-google-sheet'];
