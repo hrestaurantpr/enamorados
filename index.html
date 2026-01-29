@@ -11,19 +11,18 @@
 
     <style>
         :root {
-            /* AJUSTE: Fondo oscuro para la tarjeta */
-            --bg-body: #1a1a1a;       /* Un poco más oscuro que la tarjeta para dar profundidad */
-            --bg-card: #262625;       /* El color Charcoal de tu paleta */
+            /* MODO OSCURO ELEGANTE */
+            --bg-body: #1a1a1a;       
+            --bg-card: #262625;       /* Charcoal */
             
             --primary: #BF6C3B;       /* Terracotta */
             --primary-dark: #A65A2E;  
             
-            /* AJUSTE: Textos claros para leerse sobre fondo oscuro */
-            --text-main: #F2F2F2;     /* Off-white de tu paleta */
+            --text-main: #F2F2F2;     /* Off-white */
             --text-muted: #B0B0B0;    /* Gris suave */
-            --text-label: #889F97;    /* Verde grisáceo (ahora más claro para resaltar) */
+            --text-label: #889F97;    /* Verde grisáceo claro */
             
-            --border-color: #444444;  /* Borde sutil oscuro */
+            --border-color: #444444;  
         }
 
         body {
@@ -42,12 +41,11 @@
             background-color: var(--bg-card);
             padding: 50px 40px;
             border-radius: 4px;
-            /* Sombra suave para separarlo del fondo */
             box-shadow: 0 20px 50px rgba(0,0,0,0.7); 
             max-width: 420px;
             width: 100%;
             text-align: center;
-            border: 1px solid #333; /* Borde muy sutil */
+            border: 1px solid #333;
             border-top: 4px solid var(--primary);
         }
 
@@ -100,13 +98,13 @@
             box-sizing: border-box;
             font-size: 16px;
             background-color: transparent;
-            color: var(--text-main); /* Texto claro */
+            color: var(--text-main);
             font-family: 'Lora', serif;
             transition: border-color 0.3s;
         }
 
         input::placeholder, textarea::placeholder {
-            color: #666; /* Placeholder oscuro pero legible */
+            color: #666;
             font-family: 'Helvetica Neue', sans-serif;
             font-weight: 300;
         }
@@ -116,7 +114,6 @@
             border-bottom: 2px solid var(--primary);
         }
 
-        /* Estilo para las opciones del Select en navegadores */
         select option {
             background-color: var(--bg-card);
             color: var(--text-main);
@@ -169,7 +166,7 @@
             margin-top: 30px;
             padding: 20px;
             border: 1px solid var(--primary);
-            background-color: rgba(191, 108, 59, 0.1); /* Fondo sutil rojizo */
+            background-color: rgba(191, 108, 59, 0.1);
         }
         
         .success-message h3 {
@@ -233,6 +230,24 @@
         </div>
 
         <div class="form-group">
+            <label for="Hora">Hora Preferida</label>
+            <select name="Hora" required>
+                <option value="" disabled selected>Seleccionar hora</option>
+                <option value="4:00 PM">4:00 PM</option>
+                <option value="4:30 PM">4:30 PM</option>
+                <option value="5:00 PM">5:00 PM</option>
+                <option value="5:30 PM">5:30 PM</option>
+                <option value="6:00 PM">6:00 PM</option>
+                <option value="6:30 PM">6:30 PM</option>
+                <option value="7:00 PM">7:00 PM</option>
+                <option value="7:30 PM">7:30 PM</option>
+                <option value="8:00 PM">8:00 PM</option>
+                <option value="8:30 PM">8:30 PM</option>
+                <option value="9:00 PM">9:00 PM</option>
+            </select>
+        </div>
+
+        <div class="form-group">
             <label for="Comentarios">Restricciones / Comentarios</label>
             <textarea name="Comentarios" rows="2" placeholder="Alergias, ocasión especial, etc."></textarea>
         </div>
@@ -244,7 +259,7 @@
     
     <div class="success-message" id="success-msg">
         <h3>¡Registro Exitoso!</h3>
-        <p>Hemos recibido tus datos. Pronto te contactaremos vía WhatsApp o Email para confirmar los detalles de tu velada.</p>
+        <p>Hemos recibido tus datos. Pronto te contactaremos vía WhatsApp o Email para confirmar la disponibilidad de tu horario.</p>
     </div>
 </div>
 
