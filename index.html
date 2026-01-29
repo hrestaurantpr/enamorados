@@ -10,15 +10,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* Paleta extraída de tu imagen */
         :root {
-            --bg-body: #262625;       /* Charcoal oscuro - Fondo de pantalla */
-            --bg-card: #F2F2F2;       /* Off-White - Fondo del formulario (Legibilidad) */
-            --primary: #BF6C3B;       /* Terracotta - Botones y Acentos */
-            --primary-dark: #59281D;  /* Vino tinto - Hover de botones */
-            --text-main: #262625;     /* Texto principal oscuro */
-            --text-secondary: #5D897F;/* Verde azulado oscuro - Etiquetas */
-            --border-color: #889F97;  /* Verde grisáceo claro - Bordes */
+            /* AJUSTE: Fondo oscuro para la tarjeta */
+            --bg-body: #1a1a1a;       /* Un poco más oscuro que la tarjeta para dar profundidad */
+            --bg-card: #262625;       /* El color Charcoal de tu paleta */
+            
+            --primary: #BF6C3B;       /* Terracotta */
+            --primary-dark: #A65A2E;  
+            
+            /* AJUSTE: Textos claros para leerse sobre fondo oscuro */
+            --text-main: #F2F2F2;     /* Off-white de tu paleta */
+            --text-muted: #B0B0B0;    /* Gris suave */
+            --text-label: #889F97;    /* Verde grisáceo (ahora más claro para resaltar) */
+            
+            --border-color: #444444;  /* Borde sutil oscuro */
         }
 
         body {
@@ -36,26 +41,27 @@
         .container {
             background-color: var(--bg-card);
             padding: 50px 40px;
-            border-radius: 4px; /* Bordes menos redondeados para mayor elegancia */
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5); /* Sombra difuminada elegante */
+            border-radius: 4px;
+            /* Sombra suave para separarlo del fondo */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7); 
             max-width: 420px;
             width: 100%;
             text-align: center;
-            border-top: 4px solid var(--primary); /* Detalle de color superior */
+            border: 1px solid #333; /* Borde muy sutil */
+            border-top: 4px solid var(--primary);
         }
 
         .logo {
-            width: 180px; /* Tamaño ajustado */
+            width: 180px;
             height: auto;
             margin-bottom: 25px;
-            /* Como el fondo es claro, la imagen transparente se verá perfecta sin filtros */
         }
 
         h1 {
             font-family: 'Lora', serif;
             color: var(--primary);
             margin-bottom: 5px;
-            font-weight: 400; /* Letra fina, no gruesa */
+            font-weight: 400;
             font-size: 34px;
             letter-spacing: 0.5px;
         }
@@ -64,8 +70,8 @@
             font-family: 'Playfair Display', serif;
             font-style: italic;
             font-size: 17px;
-            font-weight: 400; /* Letra fina */
-            color: #666; /* Gris neutro para no competir con el título */
+            font-weight: 400;
+            color: var(--text-muted);
             margin-bottom: 35px;
             line-height: 1.4;
         }
@@ -80,27 +86,27 @@
             margin-bottom: 8px;
             font-size: 11px;
             font-weight: 600;
-            color: var(--text-secondary);
+            color: var(--text-label);
             text-transform: uppercase;
-            letter-spacing: 1.5px; /* Espaciado premium */
+            letter-spacing: 1.5px;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 12px 0; /* Estilo "underline" limpio */
+            padding: 12px 0;
             border: none;
             border-bottom: 1px solid var(--border-color);
             border-radius: 0;
             box-sizing: border-box;
             font-size: 16px;
             background-color: transparent;
-            color: var(--text-main);
-            font-family: 'Lora', serif; /* Input con fuente elegante */
+            color: var(--text-main); /* Texto claro */
+            font-family: 'Lora', serif;
             transition: border-color 0.3s;
         }
 
         input::placeholder, textarea::placeholder {
-            color: #aaa;
+            color: #666; /* Placeholder oscuro pero legible */
             font-family: 'Helvetica Neue', sans-serif;
             font-weight: 300;
         }
@@ -110,7 +116,12 @@
             border-bottom: 2px solid var(--primary);
         }
 
-        /* Ajuste para selects para que se vean bien */
+        /* Estilo para las opciones del Select en navegadores */
+        select option {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+        }
+
         select {
             padding: 12px 0;
             cursor: pointer;
@@ -122,7 +133,7 @@
             background-color: var(--primary);
             color: #fff;
             border: none;
-            border-radius: 2px; /* Botón más cuadrado y serio */
+            border-radius: 2px;
             font-size: 14px;
             font-weight: 500;
             cursor: pointer;
@@ -130,18 +141,18 @@
             margin-top: 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-family: 'Helvetica Neue', sans-serif; /* Sans serif para el botón para contraste */
+            font-family: 'Helvetica Neue', sans-serif;
         }
 
         button:hover {
             background-color: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(191, 108, 59, 0.3);
+            box-shadow: 0 5px 15px rgba(191, 108, 59, 0.2);
         }
 
         .spinner {
             display: none;
-            border: 3px solid #f3f3f3;
+            border: 3px solid #333;
             border-top: 3px solid var(--primary);
             border-radius: 50%;
             width: 25px;
@@ -154,11 +165,11 @@
 
         .success-message {
             display: none;
-            color: var(--text-secondary);
+            color: var(--text-main);
             margin-top: 30px;
             padding: 20px;
-            border: 1px solid var(--border-color);
-            background-color: #f9f9f9;
+            border: 1px solid var(--primary);
+            background-color: rgba(191, 108, 59, 0.1); /* Fondo sutil rojizo */
         }
         
         .success-message h3 {
@@ -226,7 +237,7 @@
             <textarea name="Comentarios" rows="2" placeholder="Alergias, ocasión especial, etc."></textarea>
         </div>
 
-        <button type="submit">Reservar mi lugar</button>
+        <button type="submit">Someter mi interés</button>
     </form>
     
     <div class="spinner" id="loading-spinner"></div>
