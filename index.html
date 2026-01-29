@@ -11,7 +11,7 @@
 
     <style>
         :root {
-            --bg-body: #59281D;       
+            --bg-body: #1a1a1a;       
             --bg-card: #262625;       
             --primary: #BF6C3B;       
             --primary-dark: #A65A2E;  
@@ -116,10 +116,9 @@
             color: var(--text-main);
         }
 
-        /* ESTILOS NUEVOS PARA BOTONES DE HORA */
         .time-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-top: 5px;
         }
@@ -149,9 +148,18 @@
             box-shadow: 0 4px 10px rgba(191, 108, 59, 0.3);
         }
         
-        /* Clase para cuando hay error de validación en horas */
         .time-grid.error .time-btn {
             border-color: var(--error-color);
+        }
+        
+        /* Animación suave para cuando aparezca la hora */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         button.submit-btn {
@@ -259,7 +267,7 @@
             </select>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="container-hora" style="display: none;">
             <label>Hora Preferida</label>
             <input type="hidden" name="Hora" id="hora-input">
             
@@ -301,36 +309,42 @@
     const loadingSpinner = document.getElementById('loading-spinner');
     const submitBtn = form.querySelector('.submit-btn');
     const successMsg = document.getElementById('success-msg');
+    
+    // Variables para lógica de fecha/hora
+    const fechaSelect = document.getElementById('fecha-select');
+    const containerHora = document.getElementById('container-hora');
     const horaInput = document.getElementById('hora-input');
     const timeGrid = document.getElementById('time-grid');
 
-    // Función para manejar la selección de hora
+    // LÓGICA: Mostrar botones solo cuando se escoge fecha
+    fechaSelect.addEventListener('change', function() {
+        if (this.value) {
+            containerHora.style.display = 'block';
+            containerHora.classList.add('fade-in'); // Efecto visual suave
+        }
+    });
+
     function selectTime(btn, timeValue) {
-        // Remover clase 'selected' de todos los botones
         const allButtons = document.querySelectorAll('.time-btn');
         allButtons.forEach(b => b.classList.remove('selected'));
         
-        // Agregar clase 'selected' al botón clickeado
         btn.classList.add('selected');
-        
-        // Guardar valor en el input oculto
         horaInput.value = timeValue;
-
-        // Quitar estilo de error si existía
         timeGrid.classList.remove('error');
     }
 
     form.addEventListener('submit', e => {
         e.preventDefault();
 
-        // VALIDACIÓN MANUAL DE HORA
-        // Como el input es hidden, el navegador no siempre avisa, así que lo hacemos manual
+        // Validar que se haya seleccionado hora si la sección está visible
         if (!horaInput.value) {
-            alert("Por favor selecciona una Hora Preferida.");
-            timeGrid.classList.add('error'); // Añade borde rojo sutil
-            // Scrollear hacia los botones
-            timeGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            return;
+            // Si el usuario seleccionó fecha pero no hora
+            if(containerHora.style.display !== 'none') {
+                alert("Por favor selecciona una Hora Preferida.");
+                timeGrid.classList.add('error');
+                containerHora.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
         }
         
         submitBtn.style.display = 'none';
