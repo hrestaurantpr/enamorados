@@ -7,23 +7,24 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
     <style>
+        /* Paleta extraída de tu imagen */
         :root {
-            --primary-color: #C77D56; /* Naranja elegante del logo */
-            --secondary-color: #6A9E9B; /* Verde azulado del logo */
-            --bg-color: #262625; /* Fondo oscuro elegante */
-            --card-bg: #444444; /* Fondo de tarjeta oscuro */
-            --text-color: #E0E0E0; /* Texto claro */
-            --input-bg: #555555; /* Fondo de inputs oscuro */
-            --input-border: #666666; /* Borde de inputs */
+            --bg-body: #262625;       /* Charcoal oscuro - Fondo de pantalla */
+            --bg-card: #F2F2F2;       /* Off-White - Fondo del formulario (Legibilidad) */
+            --primary: #BF6C3B;       /* Terracotta - Botones y Acentos */
+            --primary-dark: #59281D;  /* Vino tinto - Hover de botones */
+            --text-main: #262625;     /* Texto principal oscuro */
+            --text-secondary: #5D897F;/* Verde azulado oscuro - Etiquetas */
+            --border-color: #889F97;  /* Verde grisáceo claro - Bordes */
         }
 
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Fallback para el cuerpo */
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             margin: 0;
             display: flex;
             justify-content: center;
@@ -33,113 +34,118 @@
         }
 
         .container {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            max-width: 400px;
+            background-color: var(--bg-card);
+            padding: 50px 40px;
+            border-radius: 4px; /* Bordes menos redondeados para mayor elegancia */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); /* Sombra difuminada elegante */
+            max-width: 420px;
             width: 100%;
             text-align: center;
-            border: 1px solid #555;
+            border-top: 4px solid var(--primary); /* Detalle de color superior */
         }
 
         .logo {
-            width: 150px;
+            width: 180px; /* Tamaño ajustado */
             height: auto;
-            margin-bottom: 20px;
-            /* Mezcla para integrar el logo si tiene fondo blanco, o simplemente mostrarlo */
-            mix-blend-mode: multiply; 
-            filter: brightness(1.2) contrast(1.1);
+            margin-bottom: 25px;
+            /* Como el fondo es claro, la imagen transparente se verá perfecta sin filtros */
         }
 
         h1 {
-            font-family: 'Lora', serif; /* APLICADO LORA */
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            font-weight: 500;
-            font-size: 32px; /* Un poco más grande para lucir la fuente */
-            letter-spacing: 1px;
+            font-family: 'Lora', serif;
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-weight: 400; /* Letra fina, no gruesa */
+            font-size: 34px;
+            letter-spacing: 0.5px;
         }
 
         p.subtitle {
-            font-family: 'Playfair Display', serif; /* APLICADO PLAYFAIR */
-            font-style: italic; /* APLICADO ITALICS */
-            font-size: 16px;
-            color: #B0B0B0;
-            margin-bottom: 30px;
-            line-height: 1.5;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 17px;
+            font-weight: 400; /* Letra fina */
+            color: #666; /* Gris neutro para no competir con el título */
+            margin-bottom: 35px;
+            line-height: 1.4;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-align: left;
         }
 
         label {
             display: block;
             margin-bottom: 8px;
-            font-size: 12px;
-            font-weight: bold;
-            color: var(--secondary-color);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px; /* Espaciado premium */
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid var(--input-border);
-            border-radius: 8px;
+            padding: 12px 0; /* Estilo "underline" limpio */
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 0;
             box-sizing: border-box;
             font-size: 16px;
-            transition: border-color 0.3s, background-color 0.3s;
-            background-color: var(--input-bg);
-            color: var(--text-color);
-            font-family: 'Helvetica Neue', sans-serif; /* Mantener sans-serif para lectura fácil en inputs */
+            background-color: transparent;
+            color: var(--text-main);
+            font-family: 'Lora', serif; /* Input con fuente elegante */
+            transition: border-color 0.3s;
         }
 
         input::placeholder, textarea::placeholder {
-            color: #999;
+            color: #aaa;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: 300;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: var(--primary-color);
-            background-color: #666666;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        /* Ajuste para selects para que se vean bien */
+        select {
+            padding: 12px 0;
+            cursor: pointer;
         }
 
         button {
             width: 100%;
-            padding: 15px;
-            background-color: var(--primary-color);
-            color: white;
+            padding: 18px;
+            background-color: var(--primary);
+            color: #fff;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
+            border-radius: 2px; /* Botón más cuadrado y serio */
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
-            transition: background 0.3s, transform 0.1s;
-            margin-top: 10px;
+            transition: all 0.4s ease;
+            margin-top: 20px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-family: 'Lora', serif; /* Botón también en Lora para consistencia */
+            letter-spacing: 2px;
+            font-family: 'Helvetica Neue', sans-serif; /* Sans serif para el botón para contraste */
         }
 
         button:hover {
-            background-color: #A66543;
-        }
-
-        button:active {
-            transform: scale(0.98);
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(191, 108, 59, 0.3);
         }
 
         .spinner {
             display: none;
-            border: 4px solid var(--input-bg);
-            border-top: 4px solid var(--primary-color);
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 25px;
+            height: 25px;
             animation: spin 1s linear infinite;
             margin: 20px auto;
         }
@@ -148,18 +154,18 @@
 
         .success-message {
             display: none;
-            color: var(--secondary-color);
-            margin-top: 20px;
-            background-color: #4a4a4a;
+            color: var(--text-secondary);
+            margin-top: 30px;
             padding: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--secondary-color);
+            border: 1px solid var(--border-color);
+            background-color: #f9f9f9;
         }
         
         .success-message h3 {
-            color: var(--primary-color);
+            color: var(--primary);
             margin-top: 0;
             font-family: 'Lora', serif;
+            font-weight: 400;
         }
     </style>
 </head>
@@ -169,12 +175,12 @@
     <img src="logo_trans_new.png" alt="H Restaurant Logo" class="logo">
     
     <h1>H Restaurant</h1>
-    <p class="subtitle">Celebra el amor con una experiencia gastronómica inolvidable. <br><strong>Regístrate para la preventa exclusiva.</strong></p>
+    <p class="subtitle">Celebra el amor con una experiencia gastronómica inolvidable. <br>Preventa exclusiva.</p>
 
     <form name="submit-to-google-sheet">
         <div class="form-group">
             <label for="Nombre">Nombre Completo</label>
-            <input type="text" name="Nombre" placeholder="Tu nombre" required>
+            <input type="text" name="Nombre" placeholder="Ingresa tu nombre" required>
         </div>
 
         <div class="form-group">
@@ -184,13 +190,13 @@
 
         <div class="form-group">
             <label for="Email">Correo Electrónico</label>
-            <input type="email" name="Email" placeholder="ejemplo@correo.com" required>
+            <input type="email" name="Email" placeholder="correo@ejemplo.com" required>
         </div>
 
         <div class="form-group">
             <label for="Personas">Número de Personas</label>
             <select name="Personas" required>
-                <option value="" disabled selected>Selecciona</option>
+                <option value="" disabled selected>Seleccionar tamaño de mesa</option>
                 <option value="1">1 Persona</option>
                 <option value="2">2 Personas</option>
                 <option value="3">3 Personas</option>
@@ -207,27 +213,27 @@
         </div>
 
         <div class="form-group">
-            <label for="FechaInteres">Día de Interés</label>
+            <label for="FechaInteres">Día de Preferencia</label>
             <select name="FechaInteres" required>
-                <option value="" disabled selected>Selecciona una fecha</option>
+                <option value="" disabled selected>Seleccionar fecha</option>
                 <option value="Viernes, 13 de febrero de 2026">Viernes, 13 de febrero de 2026</option>
                 <option value="Sábado, 14 de febrero de 2026">Sábado, 14 de febrero de 2026</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label for="Comentarios">Restricciones / Comentarios (Opcional)</label>
-            <textarea name="Comentarios" rows="3" placeholder="Alergias, mesa especial, etc."></textarea>
+            <label for="Comentarios">Restricciones / Comentarios</label>
+            <textarea name="Comentarios" rows="2" placeholder="Alergias, ocasión especial, etc."></textarea>
         </div>
 
-        <button type="submit">Quiero reservar mi lugar</button>
+        <button type="submit">Reservar mi lugar</button>
     </form>
     
     <div class="spinner" id="loading-spinner"></div>
     
     <div class="success-message" id="success-msg">
-        <h3>¡Gracias!</h3>
-        <p>Hemos recibido tus datos. Pronto te contactaremos vía WhatsApp/Email para confirmar tu reserva.</p>
+        <h3>¡Registro Exitoso!</h3>
+        <p>Hemos recibido tus datos. Pronto te contactaremos vía WhatsApp o Email para confirmar los detalles de tu velada.</p>
     </div>
 </div>
 
