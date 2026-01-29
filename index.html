@@ -11,18 +11,15 @@
 
     <style>
         :root {
-            /* MODO OSCURO ELEGANTE */
             --bg-body: #59281D;       
-            --bg-card: #262625;       /* Charcoal */
-            
-            --primary: #BF6C3B;       /* Terracotta */
+            --bg-card: #262625;       
+            --primary: #BF6C3B;       
             --primary-dark: #A65A2E;  
-            
-            --text-main: #F2F2F2;     /* Off-white */
-            --text-muted: #B0B0B0;    /* Gris suave */
-            --text-label: #889F97;    /* Verde grisáceo claro */
-            
-            --border-color: #444444;  
+            --text-main: #F2F2F2;     
+            --text-muted: #B0B0B0;    
+            --text-label: #889F97;    
+            --border-color: #444444;
+            --error-color: #D32F2F;   
         }
 
         body {
@@ -81,7 +78,7 @@
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-size: 11px;
             font-weight: 600;
             color: var(--text-label);
@@ -119,12 +116,45 @@
             color: var(--text-main);
         }
 
-        select {
-            padding: 12px 0;
-            cursor: pointer;
+        /* ESTILOS NUEVOS PARA BOTONES DE HORA */
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+            gap: 10px;
+            margin-top: 5px;
         }
 
-        button {
+        .time-btn {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 10px 5px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .time-btn:hover {
+            border-color: var(--primary);
+            color: var(--text-main);
+        }
+
+        .time-btn.selected {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(191, 108, 59, 0.3);
+        }
+        
+        /* Clase para cuando hay error de validación en horas */
+        .time-grid.error .time-btn {
+            border-color: var(--error-color);
+        }
+
+        button.submit-btn {
             width: 100%;
             padding: 18px;
             background-color: var(--primary);
@@ -135,13 +165,13 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.4s ease;
-            margin-top: 20px;
+            margin-top: 30px;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-family: 'Helvetica Neue', sans-serif;
         }
 
-        button:hover {
+        button.submit-btn:hover {
             background-color: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(191, 108, 59, 0.2);
@@ -185,7 +215,7 @@
     <h1>H Restaurant</h1>
     <p class="subtitle">Celebra el amor con una experiencia gastronómica inolvidable. <br>Preventa exclusiva.</p>
 
-    <form name="submit-to-google-sheet">
+    <form name="submit-to-google-sheet" id="reservation-form">
         <div class="form-group">
             <label for="Nombre">Nombre Completo</label>
             <input type="text" name="Nombre" placeholder="Ingresa tu nombre" required>
@@ -222,7 +252,7 @@
 
         <div class="form-group">
             <label for="FechaInteres">Día de Preferencia</label>
-            <select name="FechaInteres" required>
+            <select name="FechaInteres" id="fecha-select" required>
                 <option value="" disabled selected>Seleccionar fecha</option>
                 <option value="Viernes, 13 de febrero de 2026">Viernes, 13 de febrero de 2026</option>
                 <option value="Sábado, 14 de febrero de 2026">Sábado, 14 de febrero de 2026</option>
@@ -230,21 +260,22 @@
         </div>
 
         <div class="form-group">
-            <label for="Hora">Hora Preferida</label>
-            <select name="Hora" required>
-                <option value="" disabled selected>Seleccionar hora</option>
-                <option value="4:00 PM">4:00 PM</option>
-                <option value="4:30 PM">4:30 PM</option>
-                <option value="5:00 PM">5:00 PM</option>
-                <option value="5:30 PM">5:30 PM</option>
-                <option value="6:00 PM">6:00 PM</option>
-                <option value="6:30 PM">6:30 PM</option>
-                <option value="7:00 PM">7:00 PM</option>
-                <option value="7:30 PM">7:30 PM</option>
-                <option value="8:00 PM">8:00 PM</option>
-                <option value="8:30 PM">8:30 PM</option>
-                <option value="9:00 PM">9:00 PM</option>
-            </select>
+            <label>Hora Preferida</label>
+            <input type="hidden" name="Hora" id="hora-input">
+            
+            <div class="time-grid" id="time-grid">
+                <button type="button" class="time-btn" onclick="selectTime(this, '4:00 PM')">4:00 PM</button>
+                <button type="button" class="time-btn" onclick="selectTime(this, '4:30 PM')">4:30 PM</button>
+                <button type="button" class="time-btn" onclick="selectTime(this, '5:00 PM')">5:00 PM</button>
+                <button type="button" class="time-btn" onclick="selectTime(this, '5:30 PM')">5:30 PM</button>
+                <button type="button" class="time-btn" onclick="selectTime(this, '6:00 PM')">6:00 PM</button>
+                <button type="button" class="time-btn" onclick="selectTime(this, '6:30 PM')">6:30 PM</button>
+                <button type="button" class="time-btn" onclick="selectTime(this, '7:00 PM')">7:00 PM</button>
+                <button type="button" class="time-btn" onclick="selectTime(this, '7:30 PM')">7:30 PM</button>
+                <button type="button" class="time-btn" onclick="selectTime(this, '8:00 PM')">8:00 PM</button>
+                <button type="button" class="time-btn" onclick="selectTime(this, '8:30 PM')">8:30 PM</button>
+                <button type="button" class="time-btn" onclick="selectTime(this, '9:00 PM')">9:00 PM</button>
+            </div>
         </div>
 
         <div class="form-group">
@@ -252,7 +283,7 @@
             <textarea name="Comentarios" rows="2" placeholder="Alergias, ocasión especial, etc."></textarea>
         </div>
 
-        <button type="submit">Someter mi interés</button>
+        <button type="submit" class="submit-btn">Reservar mi lugar</button>
     </form>
     
     <div class="spinner" id="loading-spinner"></div>
@@ -266,13 +297,41 @@
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzeD1sHLlZkp0CtJRAC3pjBvP1I5uEzjBU3QFyJav4SYXxIjx3KcCMpiLZUhZFm-L-6/exec';
     
-    const form = document.forms['submit-to-google-sheet'];
+    const form = document.getElementById('reservation-form');
     const loadingSpinner = document.getElementById('loading-spinner');
-    const submitBtn = form.querySelector('button');
+    const submitBtn = form.querySelector('.submit-btn');
     const successMsg = document.getElementById('success-msg');
+    const horaInput = document.getElementById('hora-input');
+    const timeGrid = document.getElementById('time-grid');
+
+    // Función para manejar la selección de hora
+    function selectTime(btn, timeValue) {
+        // Remover clase 'selected' de todos los botones
+        const allButtons = document.querySelectorAll('.time-btn');
+        allButtons.forEach(b => b.classList.remove('selected'));
+        
+        // Agregar clase 'selected' al botón clickeado
+        btn.classList.add('selected');
+        
+        // Guardar valor en el input oculto
+        horaInput.value = timeValue;
+
+        // Quitar estilo de error si existía
+        timeGrid.classList.remove('error');
+    }
 
     form.addEventListener('submit', e => {
         e.preventDefault();
+
+        // VALIDACIÓN MANUAL DE HORA
+        // Como el input es hidden, el navegador no siempre avisa, así que lo hacemos manual
+        if (!horaInput.value) {
+            alert("Por favor selecciona una Hora Preferida.");
+            timeGrid.classList.add('error'); // Añade borde rojo sutil
+            // Scrollear hacia los botones
+            timeGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
         
         submitBtn.style.display = 'none';
         loadingSpinner.style.display = 'block';
