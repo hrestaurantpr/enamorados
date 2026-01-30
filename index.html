@@ -152,7 +152,6 @@
             border-color: var(--error-color);
         }
         
-        /* Animación suave para cuando aparezca la hora */
         .fade-in {
             animation: fadeIn 0.5s ease-in;
         }
@@ -224,9 +223,25 @@
     <p class="subtitle">Celebra el amor con nuestra fusión creativa. <br>Asegura tu espacio.</p>
 
     <form name="submit-to-google-sheet" id="reservation-form">
+        
         <div class="form-group">
-            <label for="Nombre">Nombre Completo</label>
-            <input type="text" name="Nombre" placeholder="Ingresa tu nombre" required>
+            <label for="Staff">Miembro del Equipo / Anfitrión</label>
+            <select name="Staff" required>
+                <option value="" disabled selected>¿Quién hace la invitación?</option>
+                <option value="Aida">Aida</option>
+                <option value="Alanis">Alanis</option>
+                <option value="Gabriela">Gabriela</option>
+                <option value="José">José</option>
+                <option value="Kiara">Kiara</option>
+                <option value="Tamara">Tamara</option>
+                <option value="Valeria">Valeria</option>
+                <option value="Verónica">Verónica</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Nombre">Nombre del Cliente</label>
+            <input type="text" name="Nombre" placeholder="Nombre completo" required>
         </div>
 
         <div class="form-group">
@@ -309,17 +324,15 @@
     const submitBtn = form.querySelector('.submit-btn');
     const successMsg = document.getElementById('success-msg');
     
-    // Variables para lógica de fecha/hora
     const fechaSelect = document.getElementById('fecha-select');
     const containerHora = document.getElementById('container-hora');
     const horaInput = document.getElementById('hora-input');
     const timeGrid = document.getElementById('time-grid');
 
-    // LÓGICA: Mostrar botones solo cuando se escoge fecha
     fechaSelect.addEventListener('change', function() {
         if (this.value) {
             containerHora.style.display = 'block';
-            containerHora.classList.add('fade-in'); // Efecto visual suave
+            containerHora.classList.add('fade-in');
         }
     });
 
@@ -335,9 +348,7 @@
     form.addEventListener('submit', e => {
         e.preventDefault();
 
-        // Validar que se haya seleccionado hora si la sección está visible
         if (!horaInput.value) {
-            // Si el usuario seleccionó fecha pero no hora
             if(containerHora.style.display !== 'none') {
                 alert("Por favor selecciona una Hora Preferida.");
                 timeGrid.classList.add('error');
